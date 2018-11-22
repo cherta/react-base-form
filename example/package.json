@@ -5,11 +5,13 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
+    "flat": "^4.1.0",
     "prop-types": "^15.6.2",
     "react": "^16.4.1",
+    "react-base-form": "file:..",
     "react-dom": "^16.4.1",
     "react-scripts": "^1.1.4",
-    "react-base-form": "file:.."
+    "validate.js": "^0.12.0"
   },
   "scripts": {
     "start": "react-scripts start",
