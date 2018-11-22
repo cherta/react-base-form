@@ -7,8 +7,10 @@
 ## Install
 
 ```bash
-npm install --save react-base-form validate.js flat
+npm install --save react-base-form validate.js
 ```
+
+_Note: validate.js it's a peer dependency_
 
 ## Usage
 
@@ -38,13 +40,13 @@ class Example extends Component {
         {({ onChange, state, errorsFor, validate, errors }) => (
           <div>
             <input value={state.name} onChange={onChange("name")} />
-            {errorsFor("name").map((error, i) => (
-              <p key={i}>{error}</p>
+            {errorsFor("name").map(error => (
+              <p key={error}>{error}</p>
             ))}
             <br />
             <input type="email" value={state.email} onChange={onChange("email")} />
-            {errorsFor("email").map((error, i) => (
-              <p key={i}>{error}</p>
+            {errorsFor("email").map(error => (
+              <p key={error}>{error}</p>
             ))}
             <br />
             <input
@@ -52,8 +54,8 @@ class Example extends Component {
               value={state.extraInformation.dob}
               onChange={onChange("extraInformation.dob")}
             />
-            {errorsFor("extraInformation.dob").map((error, i) => (
-              <p key={i}>{error}</p>
+            {errorsFor("extraInformation.dob").map(error => (
+              <p key={error}>{error}</p>
             ))}
             <br />
             <button onClick={this.onSubmit(validate, state)}>Save</button>

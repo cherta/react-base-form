@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import flatten, { unflatten } from "flat";
+import set from "lodash.set";
+import get from "lodash.get";
 import validate from "validate.js";
 
 const isEmpty = obj => Object.getOwnPropertyNames(obj).length === 0;
@@ -7,14 +8,16 @@ const isEmpty = obj => Object.getOwnPropertyNames(obj).length === 0;
 export default class Form extends Component {
   constructor(props) {
     super(props);
-    this.state = { form: flatten(props.initialState), validations: {} };
+    this.state = { form: props.initialState, validations: {} };
   }
 
   onChange = key => event => {
     const target = event.target;
     const value = target.type === "checkbox" ? target.checked : target.value;
 
-    const form = { ...this.state.form, [key]: value };
+    let form = { ...this.state.form };
+    form = set(form, key, value);
+
     const validations = { ...this.state.validations };
     delete validations[key];
 
@@ -22,15 +25,12 @@ export default class Form extends Component {
   };
 
   validate = () => {
-    const form = this.getOriginalState();
-    const validations = validate(form, this.props.validations) || {};
+    const validations = validate(this.state.form, this.props.validations) || {};
     this.setState({ validations });
     return isEmpty(validations);
   };
 
-  getOriginalState = () => unflatten(this.state.form);
-
-  errorsFor = key => this.state.validations[key] || [];
+  errorsFor = key => get(this.state.validations, key) || [];
 
   render() {
     const { children } = this.props;
@@ -38,7 +38,7 @@ export default class Form extends Component {
       <form>
         {children({
           onChange: this.onChange,
-          state: this.getOriginalState(),
+          state: this.state.form,
           errorsFor: this.errorsFor,
           errors: this.state.validations,
           validate: this.validate

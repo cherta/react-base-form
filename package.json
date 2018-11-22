@@ -1,6 +1,6 @@
 {
   "name": "react-base-form",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "A base form for React applications",
   "author": "cherta",
   "license": "MIT",
@@ -25,7 +25,6 @@
     "prop-types": "^15.5.4",
     "react": "^15.0.0 || ^16.0.0",
     "react-dom": "^15.0.0 || ^16.0.0",
-    "flat": "^4.1.0",
     "validate.js": "^0.12.0"
   },
   "devDependencies": {
@@ -47,7 +46,6 @@
     "eslint-plugin-promise": "^4.0.0",
     "eslint-plugin-react": "^7.10.0",
     "eslint-plugin-standard": "^3.1.0",
-    "flat": "^4.1.0",
     "gh-pages": "^1.2.0",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
@@ -64,5 +62,9 @@
   },
   "files": [
     "dist"
-  ]
+  ],
+  "dependencies": {
+    "lodash.get": "^4.4.2",
+    "lodash.set": "^4.3.2"
+  }
 }
