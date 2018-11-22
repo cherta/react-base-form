@@ -25,26 +25,38 @@ const validations = {
 };
 
 class Example extends Component {
+  onSubmit = validate => event => {
+    event.preventDefault();
+    if (validate()) {
+      this.props.onSubmit(state);
+    }
+  };
+
   render() {
     return (
       <BaseForm initialState={initialState} validations={validations}>
-        {({ onChange, state, errorsFor, validate }) => (
+        {({ onChange, state, errorsFor, validate, errors }) => (
           <div>
             <input value={state.name} onChange={onChange("name")} />
-            {errorsFor("name") && errorsFor("name").map((error, i) => <p key={i}>{error}</p>)}
+            {errorsFor("name").map((error, i) => (
+              <p key={i}>{error}</p>
+            ))}
             <br />
             <input type="email" value={state.email} onChange={onChange("email")} />
-            {errorsFor("email") && errorsFor("email").map((error, i) => <p key={i}>{error}</p>)}
+            {errorsFor("email").map((error, i) => (
+              <p key={i}>{error}</p>
+            ))}
             <br />
             <input
               type="date"
               value={state.extraInformation.dob}
               onChange={onChange("extraInformation.dob")}
             />
-            {errorsFor("extraInformation.dob") &&
-              errorsFor("extraInformation.dob").map((error, i) => <p key={i}>{error}</p>)}
+            {errorsFor("extraInformation.dob").map((error, i) => (
+              <p key={i}>{error}</p>
+            ))}
             <br />
-            <button onClick={this.onSubmit(validate, state)}>Save</button>
+            <button onClick={this.onSubmit(validate)}>Save</button>
           </div>
         )}
       </BaseForm>
