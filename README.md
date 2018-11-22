@@ -25,7 +25,7 @@ const validations = {
 };
 
 class Example extends Component {
-  onSubmit = validate => event => {
+  onSubmit = (validate, state) => event => {
     event.preventDefault();
     if (validate()) {
       this.props.onSubmit(state);
@@ -56,7 +56,7 @@ class Example extends Component {
               <p key={i}>{error}</p>
             ))}
             <br />
-            <button onClick={this.onSubmit(validate)}>Save</button>
+            <button onClick={this.onSubmit(validate, state)}>Save</button>
           </div>
         )}
       </BaseForm>
